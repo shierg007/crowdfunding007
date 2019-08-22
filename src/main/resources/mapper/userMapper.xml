@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hellojava.dao.IUserDao">
+    <resultMap id="userResult" type="user">
+        <id property="userId" column="userId"/>
+        <collection property="roleList" ofType="role"
+                    select="com.hellojava.dao.IRoleDao.currentRole" column="userId"/>
+        <collection property="noHaveRole" ofType="role"
+                    select="com.hellojava.dao.IRoleDao.noHaveRole" column="userId"/>
+    </resultMap>
+    <select id="loadUser" resultType="user" parameterType="user">
+        select  * from users where userName=#{userName} and userPwd=md5(#{userPwd})
+    </select>
+    <!--注册-->
+    <insert id="saveUser" parameterType="user">
+        insert into users (userName,userPwd,userType,email,nickName,activated) values
+        (#{userName},md5(#{userPwd}),#{userType},#{email},#{nickName},0)
+    </insert>
+    <select id="checkName" resultType="user" parameterType="user">
+        select * from users where userName=#{userName}
+    </select>
+    <select id="checkNickName" resultType="user" parameterType="user">
+        select * from users where nickName=#{nickName}
+    </select>
+    <!--实名认证补充信息-->
+    <update id="apply" parameterType="user">
+        update users set realName=#{realName},IDNumber=#{IDNumber},phoneNumber=#{phoneNumber}
+        where nickName=#{nickName}
+    </update>
+    <select id="totalCount" resultType="int" >
+        select count(userId) from users
+    </select>
+    <select id="loadAll" resultType="user">
+        select * from users
+    </select>
+    <insert id="addUser" parameterType="user">
+        insert into users (userName,nickName,email)values
+        (#{userName},#{nickName},#{email})
+    </insert>
+    <select id="loadById" parameterType="int" resultMap="userResult">
+        select * from users where userId = #{userId}
+    </select>
+    <update id="updateUser" parameterType="user">
+        update users
+        <set>
+            <trim suffixOverrides=",">
+                <if test="userName!=null">
+                    userName=#{userName},
+                </if>
+                <if test="userPwd!=null">
+                    userPwd=#{userPwd},
+                </if>
+                <if test="userType!=null">
+                    userType=#{userType},
+                </if>
+                <if test="realName!=null">
+                    realName=#{realName},
+                </if>
+                <if test="IDNumber!=null">
+                    IDNumber=#{IDNumber},
+                </if>
+                <if test="phoneNumber!=null">
+                    phoneNumber=#{phoneNumber},
+                </if>
+                <if test="nickName!=null">
+                    nickName=#{nickName},
+                </if>
+                <if test="email!=null">
+                    email=#{email},
+                </if>
+                <if test="activated!=null">
+                    activated=#{activated}
+                </if>
+            </trim>
+        </set>
+        <where>
+            userId=#{userId}
+        </where>
+    </update>
+    <delete id="deleteUser" parameterType="list">
+        delete from users
+        <where>
+            userId in
+            <foreach collection="list" item="userId" separator="," open="(" close=")">
+                #{userId}
+            </foreach>
+        </where>
+    </delete>
+    <insert id="addRole" parameterType="map" >
+        insert into users_role_mapping values (#{uid},#{rid})
+    </insert>
+    <delete id="removeRole" parameterType="map">
+        delete from users_role_mapping where uid=#{uid} and rid=#{rid}
+    </delete>
+    <select id="fuzzyQueryUser" resultType="user" parameterType="map">
+        select * from users where nickName like #{nickName} or email like #{email}
+    </select>
+    <select id="fuzzyQueryUserCount" parameterType="map" resultType="int">
+        select count(userId) from users where nickName like #{nickName} or email like #{email}
+    </select>
+    <select id="loadNotActivatedUser"  resultType="user">
+        select * from users where activated=1
+    </select>
+<!-- 实名审核通过-->
+    <update id="activated" parameterType="int">
+        update users set activated=2 where userId=#{userId}
+    </update>
+<!--驳回实名认证-->
+    <update id="rejectActivated" parameterType="int">
+        update users set activated=3 where userId=#{userId}
+    </update>
+<!-- 实名认证信息提交成功-->
+    <update id="activate" parameterType="string">
+        update users set activated=1 where nickName=#{nickName}
+    </update>
+    <select id="loadEmailByNickName" parameterType="String" resultType="string">
+        select email from users where nickName = #{nickName}
+    </select>
+<!--    <select id="loadByNickName" parameterType="string">-->
+<!--        select * from users where nickName = #{nickName}-->
+<!--    </select>-->
+<!--    <select id="fuzzyQueryUserTotalCount" resultType="int" parameterType="map" >-->
+<!--        select count(userId) from users where nickName like #{nickName} or email like #{email}-->
+<!--    </select>-->
+</mapper>

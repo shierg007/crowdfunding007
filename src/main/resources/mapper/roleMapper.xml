@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hellojava.dao.IRoleDao">
+    <resultMap id="roleResult" type="role">
+        <id property="roleId" column="roleId"/>
+        <result property="roleName" column="roleName"/>
+    </resultMap>
+    <select id="loadAll" resultType="role">
+        select * from tb_role
+    </select>
+    <select id="totalCount" resultType="int">
+        select count(roleId) from tb_role
+    </select>
+    <select id="currentRole" resultType="role" parameterType="int">
+        select * from tb_role where roleId in
+        (select rid from users_role_mapping where uid=#{uid})
+    </select>
+    <select id="noHaveRole" resultType="role" parameterType="int">
+        select * from tb_role where roleId not in
+        (select rid from users_role_mapping where uid=#{uid})
+    </select>
+    <select id="maxId" resultType="int">
+        select max(roleId) from tb_role
+    </select>
+    <insert id="addRole" parameterType="role">
+        insert into tb_role values(#{roleId},#{roleName})
+    </insert>
+    <select id="loadByRoleId" parameterType="int" resultType="role">
+        select * from tb_role where roleId = #{roleId}
+    </select>
+    <update id="updateRole" parameterType="role">
+        update tb_role set roleName =#{roleName} where roleId=#{roleId}
+    </update>
+    <delete id="deleteRole" parameterType="list">
+        delete from tb_role
+        <where>
+            roleId in
+            <foreach collection="list" item="roleId" separator="," open="(" close=")">
+                #{roleId}
+            </foreach>
+        </where>
+    </delete>
+    <select id="fuzzyQueryRole" parameterType="string" resultType="role">
+        select * from tb_role where roleName like #{roleName}
+    </select>
+    <select id="maxCountFuzzy" parameterType="string" resultType="int">
+        select count(roleId) from tb_role where roleName like #{roleName}
+    </select>
+ </mapper>

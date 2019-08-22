@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/theme.css">
+	<style>
+#footer {
+    padding: 15px 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+#topcontrol {
+  color: #fff;
+  z-index: 99;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background: #222;
+  position: relative;
+  right: 14px !important;
+  bottom: 11px !important;
+  border-radius: 3px !important;
+}
+
+#topcontrol:after {
+  /*top: -2px;*/
+  left: 8.5px;
+  content: "\f106";
+  position: absolute;
+  text-align: center;
+  font-family: FontAwesome;
+}
+
+#topcontrol:hover {
+    color: #fff;
+    background: #18ba9b;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.label-type, .label-status, .label-order {
+    background-color: #fff;
+    color: #f60;
+    padding : 5px;
+    border: 1px #f60 solid;
+}
+#typeList  :not(:first-child) {
+    margin-top:20px;
+}
+.label-txt {
+    margin:10px 10px;
+    border:1px solid #ddd;
+    padding : 4px;
+    font-size:14px;
+}
+.panel {
+    border-radius:0;
+}
+
+.progress-bar-default {
+    background-color: #ddd;
+}
+	</style>
+  </head>
+  <body>
+ <div class="navbar-wrapper">
+      <div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			  <div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand" href="indexview" style="font-size:32px;">ǧ��-�����Ʒ�ڳ�ƽ̨</a>
+				</div>
+            <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> ����<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="member.html"><i class="glyphicon glyphicon-scale"></i> ��Ա����</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-comment"></i> ��Ϣ</a></li>
+                    <li class="divider"></li>
+                    <li><a href="indexview"><i class="glyphicon glyphicon-off"></i> �˳�ϵͳ</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+			  </div>
+			</nav>
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">        
+        
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading" style="text-align:center;">
+                            <div class="container-fluid">
+                                <div class="row clearfix">
+                                    <div class="col-md-3 column">
+                                        <div class="progress" style="height:50px;border-radius:0;    position: absolute;width: 75%;right:49px;">
+                                          <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">1. ȷ�ϻر�����</div>
+                                          </div>
+                                        </div>
+                                        <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
+                                             border-left-color: rgba(221, 221, 221, 1);
+                                             border-top-color: rgba(221, 221, 221, 0);
+                                             border-bottom-color: rgba(221, 221, 221, 0);
+                                             border-right-color: rgba(221, 221, 221, 0);
+                                        ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 column">
+                                        <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">2. ȷ�϶���</div>
+                                          </div>
+                                        </div>
+                                        <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
+                                             border-left-color: rgba(92, 184, 92, 1);
+                                             border-top-color: rgba(92, 184, 92, 0);
+                                             border-bottom-color: rgba(92, 184, 92, 0);
+                                             border-right-color: rgba(92, 184, 92, 0);
+                                        ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 column">
+                                        <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
+                                          <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">3. ����</div>
+                                          </div>
+                                        </div>
+                                        <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
+                                             border-left-color: rgba(221, 221, 221, 1);
+                                             border-top-color: rgba(221, 221, 221, 0);
+                                             border-bottom-color: rgba(221, 221, 221, 0);
+                                             border-right-color: rgba(221, 221, 221, 0);
+                                        ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 column">
+                                        <div class="progress" style="height:50px;border-radius:0;">
+                                          <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">4. ���</div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container-fluid">
+                                <div class="row clearfix">
+                                    <div class="col-md-12 column">
+                                        <div class="alert alert-warning alert-dismissable" style="color:red;">
+                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">��</button>
+                                            <i class="glyphicon glyphicon-info-sign"></i> <strong >�����µ���15�����ڸ���������Ķ����ᱻ�Զ��رա�</strong> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div id="address" class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
+                                        <b>
+                                            �ջ���ַ
+                                        </b>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-12 column" style="padding:0 120px;">
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                        xxxxx 188****3342 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        xxxxx 188****3342 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+                                        �µ�ַ
+                                      </label>
+                                    </div>
+                                    <div class="newAddress" style="display:none;border:10px solid #f60;border-bottom-color: #eceeef;border-width: 10px;width:20px;margin-left:20px;margin-top:-20px;
+                                             border-left-color: rgba(221, 221, 221, 0);
+                                             border-top-color: rgba(221, 221, 221, 0);
+                                             border-right-color: rgba(221, 221, 221, 0);
+                                    "></div>
+                                    <div class="newAddress panel panel-default" style="display:none;border-style: dashed;background-color:#eceeef">
+                                      <div class="panel-body">
+                                            <div class="col-md-12 column" >
+                                                <form class="form-horizontal">
+                                                  <div class="form-group">
+                                                    <label class="col-sm-2 control-label">�ջ��ˣ�*��</label>
+                                                    <div class="col-sm-10">
+                                                      <input type="text" class="form-control" style="width:200px;" placeholder="������xxxx" >
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label class="col-sm-2 control-label">�ֻ���*��</label>
+                                                    <div class="col-sm-10">
+                                                      <input class="form-control" type="text" style="width:200px;" placeholder="����д11λ�ֻ�����"></input>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label class="col-sm-2 control-label">��ַ��*��</label>
+                                                    <div class="col-sm-10">
+                                                      <input class="form-control" type="text" style="width:400px;" placeholder="����д11λ�ֻ�����"></input>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                                                    <div class="col-sm-10">
+                                                          <button type="button" class="btn btn-primary">ȷ��������Ϣ</button>
+                                                    </div>
+                                                  </div>
+                                                </form>
+                                            </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
+                                        <b>
+                                            ��Ʊ��Ϣ
+                                        </b>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-12 column" style="padding:0 120px;">
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios11" value="option1" checked>
+                                        ���跢Ʊ
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" name="optionsRadios11" id="optionsRadios22" value="option2">
+                                        ��Ҫ��Ʊ
+                                      </label>
+                                    </div>
+                                    <div class="fapiao" style="display:none;border:10px solid #f60;border-bottom-color: #eceeef;border-width: 10px;width:20px;margin-left:20px;margin-top:-20px;
+                                             border-left-color: rgba(221, 221, 221, 0);
+                                             border-top-color: rgba(221, 221, 221, 0);
+                                             border-right-color: rgba(221, 221, 221, 0);
+                                    "></div>
+                                    <div class="fapiao panel panel-default" style="display:none;border-style: dashed;background-color:#eceeef">
+                                      <div class="panel-body">
+                                            <div class="col-md-12 column" >
+                                                <form class="form-horizontal">
+                                                  <div class="form-group">
+                                                    <label class="col-sm-2 control-label">��Ʊ̧ͷ��*��</label>
+                                                    <div class="col-sm-10">
+                                                      <input type="text" class="form-control" style="width:200px;" placeholder="����" >
+                                                    </div>
+                                                  </div>
+                                                </form>
+                                            </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
+                                        <b>
+                                            ��Ŀ��Ϣ <a style="font-size:12px;" href="pay-step-1.html">�޸�����</a>
+                                        </b>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-12 column">
+                                    <table class="table table-bordered" style="text-align:center;">
+                                      <thead>
+                                        <tr style="background-color:#ddd;">
+                                          <td>��Ŀ����</td>
+                                          <td>������</td>
+                                          <td width="300">�ر�����</td>
+                                          <td width="80">�ر�����</td>
+                                          <td>֧�ֵ���</td>
+                                          <td>���ͷ���</td>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>���Ը��⾻ˮֱ����</td>
+                                          <td>�����в�ʵ���������������޹�˾</td>
+                                          <td>ÿ��1750�˳�ȡһ̨���Ը��⾻ˮֱ���������ٳ�ȡһ̨����ȡ���С�����һλ�������룩=����������1750�ˣ��������ٷ���ȡ��</td>
+                                          <td>1</td>
+                                          <td style="color:#F60">�� 1.00</td>
+                                          <td>���˷�</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 column">
+                                  <div class="form-group">
+                                    <label class="col-sm-2 control-label">��ע</label>
+                                    <div class="col-sm-10">
+                                      <textarea class="form-control" rows="1" placeholder="��д���ڻر�������ϣ������ע����Ϣ"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 column">
+                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
+                                        <b>
+                                            �˵�
+                                        </b>
+                                    </blockquote>
+                                </div>
+                                
+                                <div class="col-md-12 column">
+                                        <div class="alert alert-warning alert-dismissable" style="text-align:right; border:2px solid #ffc287;">
+                                            <ul style="list-style:none;" >
+                                                <li style="margin-top:10px;">֧�ֽ�<span style="color:red;">��1.00</span></li>
+                                                <li style="margin-top:10px;">���ͷ��ã�<span style="color:red;">��0.00</span></li>
+                                                <li style="margin-top:10px;">�Żݽ�<span style="color:red;">-��0.00</span></li>
+                                                <li style="margin-top:10px;margin-bottom:10px;"><h2>֧���ܽ�<span style="color:red;">��1.00</span></h2></li>
+                                                <li style="margin-top:10px;padding:5px;border:1px solid #F00;display:initial;background:#FFF;">
+                                                    <i class="glyphicon glyphicon-info-sign"></i> <strong>����Ҫ�� <a href="#address">����������Ϣ</a> ,���ύ����</strong> 
+                                                </li>
+                                                <li style="margin-top:10px;">
+                                                �����µ���15�����ڸ���������Ķ����ᱻ�Զ��رա�
+                                                </li>
+                                                <li style="margin-top:10px;">
+                                                <button disabled="disabled" type="button" class="btn btn-warning btn-lg" onclick="window.location.href='pay-step-3.html'"><i class="glyphicon glyphicon-credit-card"></i> ��������</button>
+                                                </li>
+                                                <li style="margin-top:10px;">
+                                                  <div class="checkbox">
+                                                    <label>
+                                                      <input type="checkbox" checked> �����˽���պ͹���
+                                                    </label>
+                                                  </div>
+                                                </li>
+                                            </ul>
+
+                                            
+                                        </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12 column">
+                                            <blockquote>
+                                                <p >
+                                                    <i class="glyphicon glyphicon-info-sign" style="color:#2a6496;"></i> ��ʾ
+                                                </p><br>
+                                                <span style="font-size:12px;">1.�ڳﲢ����Ʒ���ף�����һ�����ա�֧���߸����Լ����ж�ѡ��֧���ڳ���Ŀ���뷢���˹�ͬʵ�����벢��÷����˳�ŵ�Ļر���<br>
+                                                2.�ڳ�ƽ̨���ṩƽ̨����ռ估����֧�ֵ��н�����ڳ�������ڷ����˺�֧����֮�䣬ʹ���ڳ�ƽ̨�����ķ��ɺ���ɷ�������֧�������ге���<br>
+                                                3.����Ŀ������2017-06-04֮ǰ�ﵽ ��1000000.00 ��Ŀ�����ɹ��������Ѿ�֧�ֵĶ�����ȡ��������ȡ����ļ��ʧ�ܵģ���֧�ֵĽ�ԭ֧��·���˻ء�<br>
+                                                4.����֧����Ŀ��15�����ڸ����������֧������ᱻ�Զ��رա�<br>
+                                                5.�ڳ�ɹ����ɷ�����ͳһ���з������ۺ�����ɷ�����ͳһ�ṩ����������������޷����Żر����ӳٷ��Żر������ṩ�ر�������������������Ҫֱ�Ӻͷ�����Э�̽����<br>
+                                                6.������ͬ������������ʾ���ݣ�����Ȩѡ��֧�֣�һ��ѡ��֧�֣���Ϊ����ȷ�ϲ�ͬ��������ʾ���ݡ�</span>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="container" style="margin-top:20px;">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div id="footer">
+                        <div class="footerNav">
+                             <a rel="nofollow" href="http://www.qf.com">��������</a> | <a rel="nofollow" href="http://www.qf.com">��������</a> | <a rel="nofollow" href="http://www.qf.com">��������</a> | <a rel="nofollow" href="http://www.qf.com">��վ��ͼ</a> | <a rel="nofollow" href="http://www.qf.com">��ϵ����</a>
+                        </div>
+                        <div class="copyRight">
+                            Copyright ?2010-2014qf.com ��Ȩ����
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      
+    </div> <!-- /container -->
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+    <script src="script/back-to-top.js"></script>
+	<script>
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+$(":radio[name='optionsRadios']").click(function(){
+    if ( this.value == 'option3' ) {
+        $(".newAddress").show();
+    } else {
+        $(".newAddress").hide();
+    }
+});
+$(":radio[name='optionsRadios11']").click(function(){
+    if ( this.value == 'option2' ) {
+        $(".fapiao").show();
+    } else {
+        $(".fapiao").hide();
+    }
+});
+
+	</script>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/theme.css">
+	<style>
+#footer {
+    padding: 15px 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+	</style>
+  </head>
+  <body>
+ <div class="navbar-wrapper">
+      <div class="container">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			  <div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand" href="indexview" style="font-size:32px;">千锋-创意产品众筹平台</a>
+				</div>
+            <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <span th:text="${nickName}"></span><span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="member.html"><i class="glyphicon glyphicon-scale"></i> 会员中心</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+                    <li class="divider"></li>
+                    <li><a href="indexview"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+			  </div>
+			</nav>
+
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+      <div class="page-header">
+        <h1>实名认证 - 申请</h1>
+      </div>
+
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#"><span class="badge">1</span> 基本信息</a></li>
+		  <li role="presentation"><a href="#"><span class="badge">2</span> 资质文件上传</a></li>
+		  <li role="presentation"><a href="#"><span class="badge">3</span> 邮箱确认</a></li>
+		  <li role="presentation"><a href="#"><span class="badge">4</span> 申请确认</a></li>
+		</ul>
+        
+		<form role="form" style="margin-top:20px;" action="apply" method="post" id="form">
+		  <div class="form-group">
+			<label for="realName">真实名称</label>
+			<input type="text" class="form-control" id="realName"  name="realName" placeholder="请输入真实名称">
+              <span id="realNameInfo"></span>
+              <input type="hidden" name="nickName" th:value="${nickName}">
+		  </div>
+		  <div class="form-group">
+			<label for="IDNumber">身份证号码</label>
+			<input type="text" class="form-control" id="IDNumber" name="IDNumber" placeholder="请输入身份证号码">
+              <span id="IDNumberInfo"></span>
+		  </div>
+		  <div class="form-group">
+			<label for="tel">电话号码</label>
+			<input type="text" class="form-control" id="tel" name="phoneNumber" placeholder="请输入电话号码">
+              <span id="telInfo"></span>
+		  </div>
+          <a type="button" th:href="@{accttypeview(nickName=${nickName})}" class="btn btn-default">上一步</a>
+		  <button type="button" class="btn btn-success" id="apply">下一步</button>
+		</form>
+		<hr>
+    </div> <!-- /container -->
+        <div class="container" style="margin-top:20px;">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div id="footer">
+                        <div class="footerNav">
+                             <a rel="nofollow" href="http://www.qf.com">关于我们</a> | <a rel="nofollow" href="http://www.qf.com">服务条款</a> | <a rel="nofollow" href="http://www.qf.com">免责声明</a> | <a rel="nofollow" href="http://www.qf.com">网站地图</a> | <a rel="nofollow" href="http://www.qf.com">联系我们</a>
+                        </div>
+                        <div class="copyRight">
+                            Copyright ?2017-2017 qf.com 版权所有
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+	<script>
+        $('#myTab a').click(function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        });
+        $(function () {
+            $("#realName").blur(function () {
+                var realName = this.value;
+                if (realName != ""){
+                    $("#realNameInfo").html("<font color='green' size='-1'>可用</font>");
+                } else {
+                    $("#realNameInfo").html("<font color='red' size='-1'>不能为空</font>");
+                }
+            });
+
+            $("#IDNumber").blur(function () {
+                var IDNumber = this.value;
+                var IDNUM = /\d{17}(\d|X|x)/;
+                if (IDNumber !=""){
+                    if (IDNUM.test(IDNumber)){
+                        $("#IDNumberInfo").html("<font color='green' size='-1'>可用</font>");
+                    } else{
+                        $("#IDNumberInfo").html("<font color='red' size='-1'>非法输入</font>");
+                    }
+                }else{
+                    $("#IDNumberInfo").html("<font color='red' size='-1'>不能为空</font>");
+                }
+            });
+
+            $("#tel").blur(function () {
+                var tel = this.value;
+                var TEL = /^1[3|4|5|7|8][0-9]{9}$/;
+                if (tel !=""){
+                    if (TEL.test(tel)){
+                        $("#telInfo").html("<font color='green' size='-1'>可用</font>");
+                    } else{
+                        $("#telInfo").html("<font color='red' size='-1'>非法输入</font>");
+                    }
+                } else{
+                    $("#telInfo").html("<font color='green' size='-1'>不能为空</font>");
+                }
+            })
+
+            $("#apply").click(function () {
+                var realNameInfo = $("#realNameInfo").get(0).innerText;
+                var IDNumberInfo = $("#IDNumberInfo").get(0).innerText;
+                var telInfo = $("#telInfo").get(0).innerText;
+                if (realNameInfo == "可用" && IDNumberInfo == "可用" && telInfo == "可用"){
+                    $("#form").submit();
+                }
+            })
+
+        })
+	</script>
+  </body>
+</html>
